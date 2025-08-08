@@ -188,4 +188,634 @@
     "validation": "return typeof twoSum === 'function' && JSON.stringify(twoSum([2, 7, 11, 15], 9)) === JSON.stringify([0, 1]) && JSON.stringify(twoSum([3, 2, 4], 6)) === JSON.stringify([1, 2]) && JSON.stringify(twoSum([3, 3], 6)) === JSON.stringify([0, 1]) && JSON.stringify(twoSum([0, 4, 3, 0], 0)) === JSON.stringify([0, 3]) && JSON.stringify(twoSum([-1, -2, -3, -4, -5], -8)) === JSON.stringify([2, 4])",
     "hint": "A hash map (or a plain JavaScript object) is great for this. Loop through the array. For each element, calculate the needed complement (`target - current_number`). If the complement exists in your map, you have a solution. If not, add the current number and its index to the map."
   }
+  ,
+  {
+    "id": "22",
+    "title": "Sum of Digits",
+    "explanation": "Given a non-negative integer, return the sum of its digits.",
+    "challenge": "Write a function `sumDigits` that takes a non-negative integer and returns the sum of its digits.",
+    "initialCode": "function sumDigits(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "sumDigits(0) === 0", "assertion": "return typeof sumDigits==='function' && sumDigits(0)===0"},
+      {"name": "sumDigits(5) === 5", "assertion": "return sumDigits(5)===5"},
+      {"name": "sumDigits(10) === 1", "assertion": "return sumDigits(10)===1"},
+      {"name": "sumDigits(99) === 18", "assertion": "return sumDigits(99)===18"},
+      {"name": "sumDigits(12345) === 15", "assertion": "return sumDigits(12345)===15"},
+      {"name": "sumDigits(1001) === 2", "assertion": "return sumDigits(1001)===2"},
+      {"name": "sumDigits(567) === 18", "assertion": "return sumDigits(567)===18"},
+      {"name": "sumDigits(808) === 16", "assertion": "return sumDigits(808)===16"},
+      {"name": "sumDigits(4444) === 16", "assertion": "return sumDigits(4444)===16"},
+      {"name": "sumDigits(1234567890) === 45", "assertion": "return sumDigits(1234567890)===45"}
+    ],
+    "hint": "Convert the number to a string, split into digits, map to numbers, and sum."
+  }
+  ,
+  {
+    "id": "23",
+    "title": "Chunk an Array",
+    "explanation": "Split an array into chunks of a given size.",
+    "challenge": "Write a function `chunk` that takes an array and a positive integer size, and returns a new array of chunks.",
+    "initialCode": "function chunk(arr, size) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "[1,2,3,4,5], size 2", "assertion": "return JSON.stringify(chunk([1,2,3,4,5],2))===JSON.stringify([[1,2],[3,4],[5]])"},
+      {"name": "empty array", "assertion": "return JSON.stringify(chunk([],2))===JSON.stringify([])"},
+      {"name": "size 1", "assertion": "return JSON.stringify(chunk([1,2,3],1))===JSON.stringify([[1],[2],[3]])"},
+      {"name": "size > length", "assertion": "return JSON.stringify(chunk([1,2],5))===JSON.stringify([[1,2]])"},
+      {"name": "strings", "assertion": "return JSON.stringify(chunk(['a','b','c'],2))===JSON.stringify([['a','b'],['c']])"},
+      {"name": "size 3", "assertion": "return JSON.stringify(chunk([1,2,3,4,5,6,7],3))===JSON.stringify([[1,2,3],[4,5,6],[7]])"},
+      {"name": "nested arrays", "assertion": "return Array.isArray(chunk([[1],[2],[3]],2)[0])"},
+      {"name": "booleans", "assertion": "return JSON.stringify(chunk([true,false,true,false],2))===JSON.stringify([[true,false],[true,false]])"},
+      {"name": "objects ref", "assertion": "const a={x:1};const b={y:2};return chunk([a,b],1)[0][0]===a"},
+      {"name": "size 4", "assertion": "return JSON.stringify(chunk([1,2,3,4,5,6,7,8,9],4))===JSON.stringify([[1,2,3,4],[5,6,7,8],[9]])"}
+    ],
+    "hint": "Iterate by size and slice portions with `arr.slice(i, i+size)`."
+  }
+  ,
+  {
+    "id": "24",
+    "title": "Is Even",
+    "explanation": "Determine if a number is even.",
+    "challenge": "Write a function `isEven` that returns true if a number is even, false otherwise.",
+    "initialCode": "function isEven(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "0 is even", "assertion": "return isEven(0)===true"},
+      {"name": "1 is not even", "assertion": "return isEven(1)===false"},
+      {"name": "2 is even", "assertion": "return isEven(2)===true"},
+      {"name": "-2 is even", "assertion": "return isEven(-2)===true"},
+      {"name": "-3 is not even", "assertion": "return isEven(-3)===false"},
+      {"name": "100 is even", "assertion": "return isEven(100)===true"},
+      {"name": "101 is not even", "assertion": "return isEven(101)===false"},
+      {"name": "9999 is not even", "assertion": "return isEven(9999)===false"},
+      {"name": "Infinity not even", "assertion": "return isEven(Infinity)===false"},
+      {"name": "NaN not even", "assertion": "return isEven(NaN)===false"}
+    ],
+    "hint": "Use the remainder operator `%` and handle non-finite numbers."
+  }
+  ,
+  {
+    "id": "25",
+    "title": "Count Vowels",
+    "explanation": "Count the number of vowels (a, e, i, o, u) in a string (case-insensitive).",
+    "challenge": "Write a function `countVowels` that returns the count of vowels in a given string.",
+    "initialCode": "function countVowels(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "empty string", "assertion": "return countVowels('')===0"},
+      {"name": "no vowels", "assertion": "return countVowels('bcdfg')===0"},
+      {"name": "all vowels", "assertion": "return countVowels('aeiou')===5"},
+      {"name": "mixed case", "assertion": "return countVowels('AEiOu')===5"},
+      {"name": "hello world", "assertion": "return countVowels('hello world')===3"},
+      {"name": "Javascript", "assertion": "return countVowels('Javascript')===3"},
+      {"name": "with numbers", "assertion": "return countVowels('a1e2i3o4u5')===5"},
+      {"name": "y not vowel", "assertion": "return countVowels('y')===0"},
+      {"name": "sentence", "assertion": "return countVowels('This is a test sentence.')===7"},
+      {"name": "punctuation", "assertion": "return countVowels('!@#$%^&*()')===0"}
+    ],
+    "hint": "Use a Set of vowels and iterate the string lowercased."
+  }
+  ,
+  {
+    "id": "26",
+    "title": "Remove Vowels",
+    "explanation": "Return a new string with all vowels removed.",
+    "challenge": "Write a function `removeVowels` that removes vowels (a, e, i, o, u) from a string.",
+    "initialCode": "function removeVowels(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "empty string", "assertion": "return removeVowels('')===''"},
+      {"name": "hello world", "assertion": "return removeVowels('hello world')==='hll wrld'"},
+      {"name": "AEIOU", "assertion": "return removeVowels('AEIOU')===''"},
+      {"name": "Javascript", "assertion": "return removeVowels('Javascript')==='Jvscrpt'"},
+      {"name": "no vowels", "assertion": "return removeVowels('bcdfg')==='bcdfg'"},
+      {"name": "numbers", "assertion": "return removeVowels('a1e2i3o4u5')==='12345'"},
+      {"name": "y stays", "assertion": "return removeVowels('y')==='y'"},
+      {"name": "sentence", "assertion": "return removeVowels('This is a test sentence.')==='Ths s  tst sntnc.'"},
+      {"name": "case mixed", "assertion": "return removeVowels('AeIoUxyz')==='xyz'"},
+      {"name": "only vowels", "assertion": "return removeVowels('aeiouAEIOU')===''"}
+    ],
+    "hint": "Use a regex like /[aeiou]/gi to replace with ''."
+  }
+  ,
+  {
+    "id": "27",
+    "title": "Merge Unique",
+    "explanation": "Merge two arrays into one with unique values in order of first appearance.",
+    "challenge": "Write a function `mergeUnique` that merges arrays `a` and `b` without duplicates, preserving order.",
+    "initialCode": "function mergeUnique(a, b) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "simple", "assertion": "return JSON.stringify(mergeUnique([1,2],[2,3]))===JSON.stringify([1,2,3])"},
+      {"name": "no overlap", "assertion": "return JSON.stringify(mergeUnique([1],[2]))===JSON.stringify([1,2])"},
+      {"name": "strings", "assertion": "return JSON.stringify(mergeUnique(['a','b'],['b','c']))===JSON.stringify(['a','b','c'])"},
+      {"name": "duplicates in a", "assertion": "return JSON.stringify(mergeUnique([1,1,2],[2]))===JSON.stringify([1,2])"},
+      {"name": "empty a", "assertion": "return JSON.stringify(mergeUnique([],['x']))===JSON.stringify(['x'])"},
+      {"name": "empty b", "assertion": "return JSON.stringify(mergeUnique(['x'],[]))===JSON.stringify(['x'])"},
+      {"name": "objects by ref", "assertion": "const x={}; return mergeUnique([x],[x]).length===1"},
+      {"name": "booleans", "assertion": "return JSON.stringify(mergeUnique([true,false],[false,true]))===JSON.stringify([true,false])"},
+      {"name": "numbers order", "assertion": "return JSON.stringify(mergeUnique([3,2,1],[1,2,3,4]))===JSON.stringify([3,2,1,4])"},
+      {"name": "long", "assertion": "return mergeUnique([1,2,3,4,5],[3,4,5,6,7]).length===7"}
+    ],
+    "hint": "Use a Set to track seen values and push unseen items from both arrays."
+  }
+  ,
+  {
+    "id": "28",
+    "title": "Flatten (Shallow)",
+    "explanation": "Flatten an array one level deep.",
+    "challenge": "Write a function `flatten` that flattens one level of nesting in arrays.",
+    "initialCode": "function flatten(arr) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "[1,[2,3],4]", "assertion": "return JSON.stringify(flatten([1,[2,3],4]))===JSON.stringify([1,2,3,4])"},
+      {"name": "already flat", "assertion": "return JSON.stringify(flatten([1,2,3]))===JSON.stringify([1,2,3])"},
+      {"name": "nested deeper unaffected", "assertion": "return JSON.stringify(flatten([1,[2,[3]],4]))===JSON.stringify([1,2,[3],4])"},
+      {"name": "empty", "assertion": "return JSON.stringify(flatten([]))===JSON.stringify([])"},
+      {"name": "strings", "assertion": "return JSON.stringify(flatten(['a',['b','c']]))===JSON.stringify(['a','b','c'])"},
+      {"name": "booleans", "assertion": "return JSON.stringify(flatten([true,[false,true]]))===JSON.stringify([true,false,true])"},
+      {"name": "objects", "assertion": "const o={}; return flatten([o,[o]]).filter(x=>x===o).length===2"},
+      {"name": "nulls", "assertion": "return JSON.stringify(flatten([null,[null]]))===JSON.stringify([null,null])"},
+      {"name": "multiple nests", "assertion": "return JSON.stringify(flatten([[1],[2],[3]]))===JSON.stringify([1,2,3])"},
+      {"name": "arrays inside", "assertion": "return Array.isArray(flatten([[1],[2]]) )===true"}
+    ],
+    "hint": "Use `Array.prototype.concat` or `arr.flat(1)`."
+  }
+  ,
+  {
+    "id": "29",
+    "title": "Find Max in Array",
+    "explanation": "Return the maximum number from a non-empty numeric array.",
+    "challenge": "Write a function `maxInArray` that returns the largest number in an array.",
+    "initialCode": "function maxInArray(arr) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "simple", "assertion": "return maxInArray([1,2,3])===3"},
+      {"name": "negatives", "assertion": "return maxInArray([-1,-5,-3])===-1"},
+      {"name": "mixed", "assertion": "return maxInArray([-10,0,10,7])===10"},
+      {"name": "single", "assertion": "return maxInArray([42])===42"},
+      {"name": "duplicates", "assertion": "return maxInArray([2,2,2])===2"},
+      {"name": "floats", "assertion": "return maxInArray([1.1,1.2,1.05])===1.2"},
+      {"name": "large", "assertion": "return maxInArray([1000,999,1001])===1001"},
+      {"name": "order irrelev", "assertion": "return maxInArray([9,3,7,2])===9"},
+      {"name": "neg mix", "assertion": "return maxInArray([-2,3,-1])===3"},
+      {"name": "zeros", "assertion": "return maxInArray([0,0,0])===0"}
+    ],
+    "hint": "Use `Math.max(...arr)` or iterate to track the max."
+  }
+  ,
+  {
+    "id": "30",
+    "title": "To camelCase",
+    "explanation": "Convert a string with spaces, hyphens, or underscores to camelCase.",
+    "challenge": "Write a function `toCamelCase` that converts input like 'hello-world test_case' to 'helloWorldTestCase'.",
+    "initialCode": "function toCamelCase(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "hello world", "assertion": "return toCamelCase('hello world')==='helloWorld'"},
+      {"name": "hyphenated", "assertion": "return toCamelCase('hello-world')==='helloWorld'"},
+      {"name": "underscored", "assertion": "return toCamelCase('hello_world')==='helloWorld'"},
+      {"name": "mixed", "assertion": "return toCamelCase('hello-world test_case')==='helloWorldTestCase'"},
+      {"name": "caps preserved first lower", "assertion": "return toCamelCase('Hello World')==='helloWorld'"},
+      {"name": "single", "assertion": "return toCamelCase('word')==='word'"},
+      {"name": "numbers", "assertion": "return toCamelCase('item 2 count')==='item2Count'"},
+      {"name": "extra spaces", "assertion": "return toCamelCase('  spaced   out ')==='spacedOut'"},
+      {"name": "punctuation removed", "assertion": "return toCamelCase('hello, world!')==='helloWorld'"},
+      {"name": "empty -> empty", "assertion": "return toCamelCase('')===''"}
+    ],
+    "hint": "Split on /[^a-zA-Z0-9]+/ and join; lowercase first token, capitalize others."
+  }
+  ,
+  {
+    "id": "31",
+    "title": "Balanced Parentheses",
+    "explanation": "Check if a string of parentheses is balanced.",
+    "challenge": "Write a function `isBalanced` that returns true if parentheses are balanced, false otherwise.",
+    "initialCode": "function isBalanced(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "empty", "assertion": "return isBalanced('')===true"},
+      {"name": "()", "assertion": "return isBalanced('()')===true"},
+      {"name": "(())", "assertion": "return isBalanced('(())')===true"},
+      {"name": "(()", "assertion": "return isBalanced('(()')===false"},
+      {"name": ")(", "assertion": "return isBalanced(')(')===false"},
+      {"name": "()()", "assertion": "return isBalanced('()()')===true"},
+      {"name": "((()))", "assertion": "return isBalanced('((()))')===true"},
+      {"name": "())(", "assertion": "return isBalanced('())(')===false"},
+      {"name": "long true", "assertion": "return isBalanced('(()(()()))')===true"},
+      {"name": "long false", "assertion": "return isBalanced('(()(()())))')===false"}
+    ],
+    "hint": "Use a counter, increment for '(', decrement for ')', never allow negative, end at zero."
+  }
+  ,
+  {
+    "id": "32",
+    "title": "Prime Checker",
+    "explanation": "Determine if a number is prime.",
+    "challenge": "Write a function `isPrime` that returns true if a given integer n ≥ 0 is prime.",
+    "initialCode": "function isPrime(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "0 not prime", "assertion": "return isPrime(0)===false"},
+      {"name": "1 not prime", "assertion": "return isPrime(1)===false"},
+      {"name": "2 prime", "assertion": "return isPrime(2)===true"},
+      {"name": "3 prime", "assertion": "return isPrime(3)===true"},
+      {"name": "4 not prime", "assertion": "return isPrime(4)===false"},
+      {"name": "17 prime", "assertion": "return isPrime(17)===true"},
+      {"name": "18 not prime", "assertion": "return isPrime(18)===false"},
+      {"name": "97 prime", "assertion": "return isPrime(97)===true"},
+      {"name": "99 not prime", "assertion": "return isPrime(99)===false"},
+      {"name": "large prime-ish", "assertion": "return isPrime(7919)===true"}
+    ],
+    "hint": "Handle small cases first, then test divisors up to sqrt(n)."
+  }
+  ,
+  {
+    "id": "33",
+    "title": "Range Generator",
+    "explanation": "Create an array of integers from 0 to n-1.",
+    "challenge": "Write a function `range` that returns an array [0,1,2,...,n-1]. If n ≤ 0, return [].",
+    "initialCode": "function range(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "n=0", "assertion": "return JSON.stringify(range(0))===JSON.stringify([])"},
+      {"name": "n=1", "assertion": "return JSON.stringify(range(1))===JSON.stringify([0])"},
+      {"name": "n=5", "assertion": "return JSON.stringify(range(5))===JSON.stringify([0,1,2,3,4])"},
+      {"name": "n=10 length", "assertion": "return range(10).length===10"},
+      {"name": "negatives -> []", "assertion": "return JSON.stringify(range(-3))===JSON.stringify([])"},
+      {"name": "types numbers", "assertion": "return range(3).every((x,i)=>x===i)"},
+      {"name": "n=2", "assertion": "return JSON.stringify(range(2))===JSON.stringify([0,1])"},
+      {"name": "n=7 last is 6", "assertion": "const r=range(7);return r[r.length-1]===6"},
+      {"name": "sparse-free", "assertion": "return range(4).filter(()=>true).length===4"},
+      {"name": "sum check", "assertion": "const r=range(5);return r.reduce((a,b)=>a+b,0)===10"}
+    ],
+    "hint": "Use `Array.from({length:n}, (_,i)=>i)`."
+  }
+  ,
+  {
+    "id": "34",
+    "title": "Unique Characters",
+    "explanation": "Check if a string has all unique characters (case-sensitive).",
+    "challenge": "Write a function `hasUniqueChars` that returns true if all characters in a string are unique.",
+    "initialCode": "function hasUniqueChars(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "empty", "assertion": "return hasUniqueChars('')===true"},
+      {"name": "a", "assertion": "return hasUniqueChars('a')===true"},
+      {"name": "aa", "assertion": "return hasUniqueChars('aa')===false"},
+      {"name": "ab", "assertion": "return hasUniqueChars('ab')===true"},
+      {"name": "abcABC", "assertion": "return hasUniqueChars('abcABC')===true"},
+      {"name": "abca", "assertion": "return hasUniqueChars('abca')===false"},
+      {"name": "1234", "assertion": "return hasUniqueChars('1234')===true"},
+      {"name": "1123", "assertion": "return hasUniqueChars('1123')===false"},
+      {"name": "symbols", "assertion": "return hasUniqueChars('!@#$')===true"},
+      {"name": "mix dup", "assertion": "return hasUniqueChars('AaA')===false"}
+    ],
+    "hint": "Use a Set to detect duplicates."
+  }
+  ,
+  {
+    "id": "35",
+    "title": "Reverse Words",
+    "explanation": "Reverse the order of words in a sentence.",
+    "challenge": "Write a function `reverseWords` that takes a string and returns the words in reverse order, joined by a single space.",
+    "initialCode": "function reverseWords(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "simple", "assertion": "return reverseWords('hello world')==='world hello'"},
+      {"name": "single", "assertion": "return reverseWords('hello')==='hello'"},
+      {"name": "extra spaces", "assertion": "return reverseWords('  a   b  c ')==='c b a'"},
+      {"name": "punctuation kept", "assertion": "return reverseWords('hi, there!')==='there! hi,'"},
+      {"name": "numbers", "assertion": "return reverseWords('1 2 3')==='3 2 1'"},
+      {"name": "mixed", "assertion": "return reverseWords('The quick brown fox')==='fox brown quick The'"},
+      {"name": "empty -> empty", "assertion": "return reverseWords('')===''"},
+      {"name": "spaces only", "assertion": "return reverseWords('   ')===''"},
+      {"name": "tabs", "assertion": "return reverseWords('\t a  b')==='b a'"},
+      {"name": "unicode", "assertion": "return reverseWords('こんにちは 世界')==='世界 こんにちは'"}
+    ],
+    "hint": "Split on whitespace with /\s+/, filter empties, reverse, join with ' '."
+  }
+  ,
+  {
+    "id": "36",
+    "title": "Triangular Number",
+    "explanation": "Compute the n-th triangular number T(n) = n*(n+1)/2 for n ≥ 0.",
+    "challenge": "Write a function `triangular` that returns the triangular number for n.",
+    "initialCode": "function triangular(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "T(0)=0", "assertion": "return triangular(0)===0"},
+      {"name": "T(1)=1", "assertion": "return triangular(1)===1"},
+      {"name": "T(2)=3", "assertion": "return triangular(2)===3"},
+      {"name": "T(3)=6", "assertion": "return triangular(3)===6"},
+      {"name": "T(4)=10", "assertion": "return triangular(4)===10"},
+      {"name": "T(5)=15", "assertion": "return triangular(5)===15"},
+      {"name": "T(10)=55", "assertion": "return triangular(10)===55"},
+      {"name": "T(50)=1275", "assertion": "return triangular(50)===1275"},
+      {"name": "neg -> 0?", "assertion": "return triangular(-1)===0"},
+      {"name": "float -> floor?", "assertion": "return triangular(3.7)===triangular(3)"}
+    ],
+    "hint": "Guard for n ≤ 0 then use the formula or loop."
+  }
+  ,
+  {
+    "id": "37",
+    "title": "Rotate Array Right",
+    "explanation": "Rotate an array to the right by k steps.",
+    "challenge": "Write a function `rotateRight` that returns a new array with elements rotated right by k.",
+    "initialCode": "function rotateRight(arr, k) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "k=1", "assertion": "return JSON.stringify(rotateRight([1,2,3],1))===JSON.stringify([3,1,2])"},
+      {"name": "k=2", "assertion": "return JSON.stringify(rotateRight([1,2,3],2))===JSON.stringify([2,3,1])"},
+      {"name": "k=3 -> same", "assertion": "return JSON.stringify(rotateRight([1,2,3],3))===JSON.stringify([1,2,3])"},
+      {"name": "k>len", "assertion": "return JSON.stringify(rotateRight([1,2,3],5))===JSON.stringify([2,3,1])"},
+      {"name": "empty", "assertion": "return JSON.stringify(rotateRight([],3))===JSON.stringify([])"},
+      {"name": "strings", "assertion": "return JSON.stringify(rotateRight(['a','b'],1))===JSON.stringify(['b','a'])"},
+      {"name": "booleans", "assertion": "return JSON.stringify(rotateRight([true,false,true],1))===JSON.stringify([true,true,false])"},
+      {"name": "k=0", "assertion": "return JSON.stringify(rotateRight([1,2],0))===JSON.stringify([1,2])"},
+      {"name": "k=4", "assertion": "return JSON.stringify(rotateRight([1,2,3,4],4))===JSON.stringify([1,2,3,4])"},
+      {"name": "immutability", "assertion": "const a=[1,2,3]; rotateRight(a,1); return JSON.stringify(a)===JSON.stringify([1,2,3])"}
+    ],
+    "hint": "Use k % arr.length and slicing."
+  }
+  ,
+  {
+    "id": "38",
+    "title": "Count Occurrences",
+    "explanation": "Count occurrences of a character in a string (case-sensitive).",
+    "challenge": "Write a function `countOccurrences` that returns how many times a character appears in a string.",
+    "initialCode": "function countOccurrences(str, ch) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "empty", "assertion": "return countOccurrences('', 'a')===0"},
+      {"name": "none", "assertion": "return countOccurrences('bbb','a')===0"},
+      {"name": "simple", "assertion": "return countOccurrences('banana','a')===3"},
+      {"name": "case sensitive", "assertion": "return countOccurrences('AaAa','a')===2"},
+      {"name": "spaces", "assertion": "return countOccurrences('a a a',' ')===2"},
+      {"name": "punctuation", "assertion": "return countOccurrences('!?!?','!')===2"},
+      {"name": "numbers", "assertion": "return countOccurrences('112233','1')===2"},
+      {"name": "unicode", "assertion": "return countOccurrences('ééé','é')===3"},
+      {"name": "end", "assertion": "return countOccurrences('abba','a')===2"},
+      {"name": "middle", "assertion": "return countOccurrences('abcabc','b')===2"}
+    ],
+    "hint": "Iterate and count matches or use split/join length diff."
+  }
+  ,
+  {
+    "id": "39",
+    "title": "Repeat String",
+    "explanation": "Repeat a string n times.",
+    "challenge": "Write a function `repeatString` that returns the string repeated n times (n ≥ 0).",
+    "initialCode": "function repeatString(str, n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "n=0", "assertion": "return repeatString('a',0)===''"},
+      {"name": "n=1", "assertion": "return repeatString('a',1)==='a'"},
+      {"name": "n=3", "assertion": "return repeatString('ab',3)==='ababab'"},
+      {"name": "empty str", "assertion": "return repeatString('',5)===''"},
+      {"name": "space", "assertion": "return repeatString(' ',4)==='    '"},
+      {"name": "unicode", "assertion": "return repeatString('🙂',2)==='🙂🙂'"},
+      {"name": "n large small", "assertion": "return repeatString('x',10).length===10"},
+      {"name": "n=5 pattern", "assertion": "return repeatString('xy',5)==='xyxyxyxyxy'"},
+      {"name": "n=2 caps", "assertion": "return repeatString('Ab',2)==='AbAb'"},
+      {"name": "n float -> floor", "assertion": "return repeatString('a',2.9)==='aa'"}
+    ],
+    "hint": "Use `String.prototype.repeat` or build manually; floor n."
+  }
+  ,
+  {
+    "id": "40",
+    "title": "Fibonacci Array",
+    "explanation": "Return an array of the first n Fibonacci numbers starting from 0,1.",
+    "challenge": "Write a function `fibonacciArray` that returns an array of length n.",
+    "initialCode": "function fibonacciArray(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "n=0", "assertion": "return JSON.stringify(fibonacciArray(0))===JSON.stringify([])"},
+      {"name": "n=1", "assertion": "return JSON.stringify(fibonacciArray(1))===JSON.stringify([0])"},
+      {"name": "n=2", "assertion": "return JSON.stringify(fibonacciArray(2))===JSON.stringify([0,1])"},
+      {"name": "n=5", "assertion": "return JSON.stringify(fibonacciArray(5))===JSON.stringify([0,1,1,2,3])"},
+      {"name": "n=7 last", "assertion": "const r=fibonacciArray(7);return r[6]===8"},
+      {"name": "non-negative", "assertion": "return Array.isArray(fibonacciArray(3))"},
+      {"name": "immutability", "assertion": "const r=fibonacciArray(3); r[0]=99; return fibonacciArray(3)[0]===0"},
+      {"name": "sum check", "assertion": "const r=fibonacciArray(6);return r.reduce((a,b)=>a+b,0)===12"},
+      {"name": "n float floor", "assertion": "return fibonacciArray(3.9).length===3"},
+      {"name": "n negative -> []", "assertion": "return fibonacciArray(-1).length===0"}
+    ],
+    "hint": "Iteratively push next value as sum of previous two."
+  }
+  ,
+  {
+    "id": "41",
+    "title": "Median of Array",
+    "explanation": "Compute the median of a numeric array.",
+    "challenge": "Write a function `median` that returns the median. For even length, return the average of two middle numbers.",
+    "initialCode": "function median(arr) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "odd", "assertion": "return median([1,3,2])===2"},
+      {"name": "even", "assertion": "return median([1,2,3,4])===2.5"},
+      {"name": "unsorted", "assertion": "return median([7,1,3,5])===4"},
+      {"name": "negatives", "assertion": "return median([-3,-1,-2])===-2"},
+      {"name": "floats", "assertion": "return median([1.5,2.5,3.5])===2.5"},
+      {"name": "dups", "assertion": "return median([1,1,1,1])===1"},
+      {"name": "two items", "assertion": "return median([5,1])===3"},
+      {"name": "single", "assertion": "return median([10])===10"},
+      {"name": "large", "assertion": "return median([100,50,0,150])===75"},
+      {"name": "zeroes", "assertion": "return median([0,0,0])===0"}
+    ],
+    "hint": "Sort a copy numerically; compute middle index(es)."
+  }
+  ,
+  {
+    "id": "42",
+    "title": "Remove Duplicate Characters",
+    "explanation": "Remove duplicate characters from a string, preserving first occurrences.",
+    "challenge": "Write a function `removeDuplicateChars` that removes duplicates from a string.",
+    "initialCode": "function removeDuplicateChars(str) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "empty", "assertion": "return removeDuplicateChars('')===''"},
+      {"name": "aabb -> ab", "assertion": "return removeDuplicateChars('aabb')==='ab'"},
+      {"name": "abc -> abc", "assertion": "return removeDuplicateChars('abc')==='abc'"},
+      {"name": "112233 -> 123", "assertion": "return removeDuplicateChars('112233')==='123'"},
+      {"name": "spaces kept once", "assertion": "return removeDuplicateChars('a a a')==='a '"},
+      {"name": "case-sensitive", "assertion": "return removeDuplicateChars('AaA')==='Aa'"},
+      {"name": "symbols", "assertion": "return removeDuplicateChars('!!@@')==='!@'"},
+      {"name": "long", "assertion": "return removeDuplicateChars('abccba')==='abc'"},
+      {"name": "unicode", "assertion": "return removeDuplicateChars('こんにちはにちは')==='こんにちは'"},
+      {"name": "punctuation", "assertion": "return removeDuplicateChars('a,a,a')==='a,'"}
+    ],
+    "hint": "Track seen characters in a Set and build the result."
+  }
+  ,
+  {
+    "id": "43",
+    "title": "Get Object Path",
+    "explanation": "Get a nested property value from an object using a dot-separated path.",
+    "challenge": "Write a function `getObjectPath` that returns the value at path or `undefined` if not found.",
+    "initialCode": "function getObjectPath(obj, path) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "simple", "assertion": "const o={a:{b:{c:3}}}; return getObjectPath(o,'a.b.c')===3"},
+      {"name": "missing -> undefined", "assertion": "const o={a:{}}; return getObjectPath(o,'a.b')===undefined"},
+      {"name": "root level", "assertion": "const o={x:1}; return getObjectPath(o,'x')===1"},
+      {"name": "array index", "assertion": "const o={a:[{b:2}]}; return getObjectPath(o,'a.0.b')===2"},
+      {"name": "null short-circuit", "assertion": "const o={a:null}; return getObjectPath(o,'a.b')===undefined"},
+      {"name": "empty path -> obj", "assertion": "const o={z:1}; return getObjectPath(o,'')===o"},
+      {"name": "undefined obj", "assertion": "return getObjectPath(undefined,'a')===undefined"},
+      {"name": "number obj", "assertion": "return getObjectPath(3,'toString')!==undefined"},
+      {"name": "deep", "assertion": "const o={a:{b:{c:{d:4}}}}; return getObjectPath(o,'a.b.c.d')===4"},
+      {"name": "trailing dot invalid", "assertion": "const o={a:1}; return getObjectPath(o,'a.')===undefined"}
+    ],
+    "hint": "Split by '.', iterate, guard for null/undefined at each step."
+  }
+  ,
+  {
+    "id": "44",
+    "title": "Sum Inclusive Range",
+    "explanation": "Sum all integers between a and b inclusive. If a > b, swap them.",
+    "challenge": "Write a function `sumRange` that returns the sum from min(a,b) to max(a,b).",
+    "initialCode": "function sumRange(a, b) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "1..3", "assertion": "return sumRange(1,3)===6"},
+      {"name": "3..1", "assertion": "return sumRange(3,1)===6"},
+      {"name": "5..5", "assertion": "return sumRange(5,5)===5"},
+      {"name": "-2..2", "assertion": "return sumRange(-2,2)===0"},
+      {"name": "0..0", "assertion": "return sumRange(0,0)===0"},
+      {"name": "-3..-1", "assertion": "return sumRange(-3,-1)===-6"},
+      {"name": "large", "assertion": "return sumRange(1,100)===5050"},
+      {"name": "order invariant", "assertion": "return sumRange(10,7)===sumRange(7,10)"},
+      {"name": "floats floor", "assertion": "return sumRange(1.9,3.2)===sumRange(1,3)"},
+      {"name": "neg float", "assertion": "return sumRange(-2.9,-1.1)===sumRange(-3,-1)"}
+    ],
+    "hint": "Determine start/end, then use formula or loop."
+  }
+  ,
+  {
+    "id": "45",
+    "title": "Second Largest (Distinct)",
+    "explanation": "Find the second largest distinct number in an array; return null if fewer than two unique values.",
+    "challenge": "Write a function `secondLargest` that returns the second distinct largest number or null.",
+    "initialCode": "function secondLargest(arr) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "[1,2,3] -> 2", "assertion": "return secondLargest([1,2,3])===2"},
+      {"name": "dups -> 2", "assertion": "return secondLargest([3,3,2])===2"},
+      {"name": "single -> null", "assertion": "return secondLargest([5])===null"},
+      {"name": "all same -> null", "assertion": "return secondLargest([1,1,1])===null"},
+      {"name": "negatives", "assertion": "return secondLargest([-1,-2,-3])===-2"},
+      {"name": "mixed", "assertion": "return secondLargest([-10,0,10,10])===0"},
+      {"name": "floats", "assertion": "return secondLargest([1.1,1.2,1.05])===1.1"},
+      {"name": "order", "assertion": "return secondLargest([5,4,3,2,1])===4"},
+      {"name": "with zero", "assertion": "return secondLargest([0,0,1])===0"},
+      {"name": "long", "assertion": "return secondLargest([1,2,3,4,5,6,7,8,9])===8"}
+    ],
+    "hint": "Track top two distinct values in one pass."
+  }
+  ,
+  {
+    "id": "46",
+    "title": "Zip Arrays",
+    "explanation": "Combine two arrays into an array of pairs, truncating to the shorter length.",
+    "challenge": "Write a function `zip` that returns pairs: zip([1,2],["a","b"]) -> [[1,'a'],[2,'b']].",
+    "initialCode": "function zip(a, b) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "equal length", "assertion": "return JSON.stringify(zip([1,2],['a','b']))===JSON.stringify([[1,'a'],[2,'b']])"},
+      {"name": "a longer", "assertion": "return JSON.stringify(zip([1,2,3],['a']))===JSON.stringify([[1,'a']])"},
+      {"name": "b longer", "assertion": "return JSON.stringify(zip([1],['a','b']))===JSON.stringify([[1,'a']])"},
+      {"name": "empty", "assertion": "return JSON.stringify(zip([],[]))===JSON.stringify([])"},
+      {"name": "objects", "assertion": "const o={};return zip([o],[o])[0][0]===o && zip([o],[o])[0][1]===o"},
+      {"name": "types", "assertion": "return Array.isArray(zip([1],['a'])[0])"},
+      {"name": "booleans", "assertion": "return JSON.stringify(zip([true,false],[1,2]))===JSON.stringify([[true,1],[false,2]])"},
+      {"name": "numbers", "assertion": "return JSON.stringify(zip([1,2,3],[4,5,6]))===JSON.stringify([[1,4],[2,5],[3,6]])"},
+      {"name": "strings", "assertion": "return JSON.stringify(zip(['x','y'],['a','b']))===JSON.stringify([['x','a'],['y','b']])"},
+      {"name": "immutability", "assertion": "const a=[1,2]; zip(a,[3,4]); return JSON.stringify(a)===JSON.stringify([1,2])"}
+    ],
+    "hint": "Iterate up to Math.min(a.length,b.length)."
+  }
+  ,
+  {
+    "id": "47",
+    "title": "Uncompress String",
+    "explanation": "Given a run-length encoded string like 'a2b3', return 'aabbb'. Letters are followed by positive integers; single letters have implicit 1.",
+    "challenge": "Write a function `uncompress` that expands the encoded string.",
+    "initialCode": "function uncompress(s) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "a2b3 -> aabbb", "assertion": "return uncompress('a2b3')==='aabbb'"},
+      {"name": "x1 -> x", "assertion": "return uncompress('x1')==='x'"},
+      {"name": "single letters", "assertion": "return uncompress('abc')==='abc'"},
+      {"name": "multi-digit", "assertion": "return uncompress('a12').length===12"},
+      {"name": "mixed", "assertion": "return uncompress('a2b10c3').endsWith('ccc')"},
+      {"name": "empty -> empty", "assertion": "return uncompress('')===''"},
+      {"name": "numbers only invalid -> ''", "assertion": "return uncompress('12')===''"},
+      {"name": "case sensitive", "assertion": "return uncompress('A2a2')==='AAaa'"},
+      {"name": "spaces allowed", "assertion": "return uncompress('x2 y1')==='xxy'"},
+      {"name": "non-letters kept", "assertion": "return uncompress('#2!1')==='##!'"}
+    ],
+    "hint": "Iterate, track current char and following number (possibly multi-digit)."
+  }
+  ,
+  {
+    "id": "48",
+    "title": "Format Phone Number",
+    "explanation": "Given an array of 10 digits, return a phone number string like (123) 456-7890.",
+    "challenge": "Write a function `formatPhoneNumber` that formats a 10-digit array.",
+    "initialCode": "function formatPhoneNumber(digits) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "basic", "assertion": "return formatPhoneNumber([1,2,3,4,5,6,7,8,9,0])==='(123) 456-7890'"},
+      {"name": "zeros", "assertion": "return formatPhoneNumber([0,0,0,0,0,0,0,0,0,0])==='(000) 000-0000'"},
+      {"name": "all ones", "assertion": "return formatPhoneNumber([1,1,1,1,1,1,1,1,1,1])==='(111) 111-1111'"},
+      {"name": "ends with 12", "assertion": "return formatPhoneNumber([9,8,7,6,5,4,3,2,1,2])==='(987) 654-3212'"},
+      {"name": "starts 555", "assertion": "return formatPhoneNumber([5,5,5,1,2,3,4,5,6,7])==='(555) 123-4567'"},
+      {"name": "length 10", "assertion": "return formatPhoneNumber([1,2,3,4,5,6,7,8,9,9]).length===14"},
+      {"name": "string digits", "assertion": "return formatPhoneNumber(['1','2','3','4','5','6','7','8','9','0'])==='(123) 456-7890'"},
+      {"name": "non-digits -> sanitize", "assertion": "return formatPhoneNumber(['1','a',3,4,5,6,7,8,9,0])==='(103) 456-7890'"},
+      {"name": "immutable", "assertion": "const d=[1,2,3,4,5,6,7,8,9,0]; formatPhoneNumber(d); return JSON.stringify(d)===JSON.stringify([1,2,3,4,5,6,7,8,9,0])"},
+      {"name": "array-like", "assertion": "return formatPhoneNumber({0:1,1:2,2:3,3:4,4:5,5:6,6:7,7:8,8:9,9:0,length:10})==='(123) 456-7890'"}
+    ],
+    "hint": "Coerce to digits 0-9, then template `(xxx) xxx-xxxx`."
+  }
+  ,
+  {
+    "id": "49",
+    "title": "Sum of Multiples",
+    "explanation": "Find the sum of all numbers below n that are multiples of 3 or 5.",
+    "challenge": "Write a function `sumOfMultiples` that returns the sum for n.",
+    "initialCode": "function sumOfMultiples(n) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "n=0", "assertion": "return sumOfMultiples(0)===0"},
+      {"name": "n=1", "assertion": "return sumOfMultiples(1)===0"},
+      {"name": "n=10", "assertion": "return sumOfMultiples(10)===23"},
+      {"name": "n=20", "assertion": "return sumOfMultiples(20)===78"},
+      {"name": "n=1000", "assertion": "return sumOfMultiples(1000)===233168"},
+      {"name": "n=3", "assertion": "return sumOfMultiples(3)===0"},
+      {"name": "n=4", "assertion": "return sumOfMultiples(4)===3"},
+      {"name": "n=6", "assertion": "return sumOfMultiples(6)===8"},
+      {"name": "float floor", "assertion": "return sumOfMultiples(10.9)===sumOfMultiples(10)"},
+      {"name": "negative -> 0", "assertion": "return sumOfMultiples(-5)===0"}
+    ],
+    "hint": "Loop up to n-1 and accumulate or use arithmetic series formulas."
+  }
+  ,
+  {
+    "id": "50",
+    "title": "Integer to Roman Numerals",
+    "explanation": "Convert an integer 1..3999 to a Roman numeral.",
+    "challenge": "Write a function `toRoman` that converts numbers to Roman numerals.",
+    "initialCode": "function toRoman(num) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "1 -> I", "assertion": "return toRoman(1)==='I'"},
+      {"name": "4 -> IV", "assertion": "return toRoman(4)==='IV'"},
+      {"name": "9 -> IX", "assertion": "return toRoman(9)==='IX'"},
+      {"name": "58 -> LVIII", "assertion": "return toRoman(58)==='LVIII'"},
+      {"name": "1994 -> MCMXCIV", "assertion": "return toRoman(1994)==='MCMXCIV'"},
+      {"name": "3999 -> MMMCMXCIX", "assertion": "return toRoman(3999)==='MMMCMXCIX'"},
+      {"name": "44 -> XLIV", "assertion": "return toRoman(44)==='XLIV'"},
+      {"name": "0 -> ''", "assertion": "return toRoman(0)===''"},
+      {"name": "negative -> ''", "assertion": "return toRoman(-1)===''"},
+      {"name": ">3999 -> ''", "assertion": "return toRoman(4000)===''"}
+    ],
+    "hint": "Greedy subtract with numeral map, handle subtractive forms (IV, IX, XL, XC, CD, CM)."
+  }
+  ,
+  {
+    "id": "51",
+    "title": "Roman Numerals to Integer",
+    "explanation": "Convert a Roman numeral to an integer.",
+    "challenge": "Write a function `fromRoman` that parses valid Roman numerals and returns an integer.",
+    "initialCode": "function fromRoman(s) {\n  // Your code here\n}",
+    "tests": [
+      {"name": "I -> 1", "assertion": "return fromRoman('I')===1"},
+      {"name": "IV -> 4", "assertion": "return fromRoman('IV')===4"},
+      {"name": "IX -> 9", "assertion": "return fromRoman('IX')===9"},
+      {"name": "LVIII -> 58", "assertion": "return fromRoman('LVIII')===58"},
+      {"name": "MCMXCIV -> 1994", "assertion": "return fromRoman('MCMXCIV')===1994"},
+      {"name": "MMMCMXCIX -> 3999", "assertion": "return fromRoman('MMMCMXCIX')===3999"},
+      {"name": "XLIV -> 44", "assertion": "return fromRoman('XLIV')===44"},
+      {"name": "invalid -> 0", "assertion": "return fromRoman('')===0"},
+      {"name": "lowercase", "assertion": "return fromRoman('xiv')===14"},
+      {"name": "random valid", "assertion": "return fromRoman('CDXLIV')===444"}
+    ],
+    "hint": "Scan left-to-right with a value map; if a smaller value precedes a larger one, subtract it."
+  }
 ]

@@ -197,3 +197,83 @@ body {
 .cm-editor .cm-line:nth-child(2n) {
     background-color: rgba(255, 255, 255, 0.03);
 }
+
+/* Test details list */
+.test-details {
+  margin-top: 0.5rem;
+  list-style: none;
+  padding-left: 0;
+}
+.test-details li {
+  padding: 4px 0;
+}
+.test-details li.passed { color: var(--success-color); }
+.test-details li.failed { color: var(--failure-color); }
+
+/* Floating Glossary button */
+.glossary-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.glossary-fab:hover { background-color: #005a9e; }
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+.modal {
+  width: min(800px, 90vw);
+  max-height: 80vh;
+  background-color: #222;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modal-body {
+  padding: 1rem;
+  overflow: auto;
+}
+.glossary-list .glossary-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.glossary-list .glossary-item .term {
+  color: #fff;
+  font-weight: 600;
+}
+.glossary-list .glossary-item .definition {
+  opacity: 0.9;
+}
