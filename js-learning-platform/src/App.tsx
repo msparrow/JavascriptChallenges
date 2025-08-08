@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import { vscodeDark } from '@uiw/codemirror-theme-vscode';
+import { vscodeDark, vscodeLight } from '@uiw/codemirror-theme-vscode';
 import './App.css';
 
 interface Lesson {
@@ -35,7 +35,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showHint, setShowHint] = useState(false);
-  const [showGlossary, setShowGlossary] = useState(false);
+  // Glossary now permanent in right pane
   const [glossary, setGlossary] = useState<{ term: string; definition: string; example?: string }[]>([]);
   const [expandedGlossary, setExpandedGlossary] = useState<Record<number, boolean>>({});
   // Theming
@@ -194,10 +194,6 @@ function App() {
         e.preventDefault();
         goToNextLesson();
         return;
-      }
-      // g to toggle glossary
-      if (!e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 'g') {
-        setShowGlossary(prev => !prev);
       }
       // t to toggle theme
       if (!e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 't') {
@@ -414,7 +410,7 @@ function App() {
               value={code}
               height="100%"
               extensions={[javascript({ jsx: true })]}
-              theme={vscodeDark}
+              theme={theme === 'dark' ? vscodeDark : vscodeLight}
               onChange={handleCodeChange}
             />
           </div>
@@ -428,52 +424,51 @@ function App() {
           className="splitter"
           role="separator"
           aria-orientation="vertical"
-          aria-label="Resize preview pane"
+          aria-label="Resize glossary pane"
           tabIndex={0}
           onMouseDown={(e) => startDrag('right', e)}
           onKeyDown={onSplitterKeyDown('right')}
         />
 
-        <div className="preview-pane" aria-label="Code output">
-          <iframe id="preview" src={`${base}iframe.html`} title="Preview output" />
+        <div className="preview-pane" aria-label="Glossary">
+          <div className="sidebar-header">
+            <h2>Glossary</h2>
+          </div>
+          <div className="sidebar-body glossary-list">
+            {glossary.length === 0 && <p>No glossary items found.</p>}
+            {glossary.map((g, idx) => {
+              const isOpen = !!expandedGlossary[idx];
+              return (
+                <div key={idx} className={`glossary-item ${isOpen ? 'open' : ''}`}>
+                  <button className="glossary-header" onClick={() => toggleGlossary(idx)}>
+                    <span className="term">{g.term}</span>
+                    <span className={`chevron ${isOpen ? 'rot' : ''}`}>▾</span>
+                  </button>
+                  {isOpen && (
+                    <div className="glossary-content">
+                      <p className="definition">{g.definition}</p>
+                      {g.example && (
+                        <div className="code-block">
+                          <pre><code>{g.example}</code></pre>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {showGlossary && (
-        <div className="modal-backdrop" onClick={() => setShowGlossary(false)}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Glossary</h2>
-              <button className="modal-close" onClick={() => setShowGlossary(false)}>×</button>
-            </div>
-            <div className="modal-body glossary-list">
-              {glossary.length === 0 && <p>No glossary items found.</p>}
-              {glossary.map((g, idx) => {
-                const isOpen = !!expandedGlossary[idx];
-                return (
-                  <div key={idx} className={`glossary-item ${isOpen ? 'open' : ''}`}>
-                    <button className="glossary-header" onClick={() => toggleGlossary(idx)}>
-                      <span className="term">{g.term}</span>
-                      <span className={`chevron ${isOpen ? 'rot' : ''}`}>▾</span>
-                    </button>
-                    {isOpen && (
-                      <div className="glossary-content">
-                        <p className="definition">{g.definition}</p>
-                        {g.example && (
-                          <div className="code-block">
-                            <pre><code>{g.example}</code></pre>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      )}
-      <button className="glossary-fab" onClick={() => setShowGlossary(true)} title="Open glossary (G)">Glossary</button>
+      {/* Hidden runner iframe to execute code */}
+      <iframe
+        id="preview"
+        src={`${base}iframe.html`}
+        title="Hidden code runner"
+        className="runner-iframe"
+        aria-hidden
+      />
     </div>
   );
 }
