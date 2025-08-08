@@ -1,0 +1,2 @@
+# Ignore local GitHub Pages publish output
+.gh-pages-publish/
