@@ -697,7 +697,7 @@
     "id": "46",
     "title": "Zip Arrays",
     "explanation": "Combine two arrays into an array of pairs, truncating to the shorter length.",
-    "challenge": "Write a function `zip` that returns pairs: zip([1,2],["a","b"]) -> [[1,'a'],[2,'b']].",
+    "challenge": "Write a function `zip` that returns pairs: zip([1,2],['a','b']) -> [[1,'a'],[2,'b']].",
     "initialCode": "function zip(a, b) {\n  // Your code here\n}",
     "tests": [
       {"name": "equal length", "assertion": "return JSON.stringify(zip([1,2],['a','b']))===JSON.stringify([[1,'a'],[2,'b']])"},
