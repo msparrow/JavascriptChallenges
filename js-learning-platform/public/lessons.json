@@ -1,0 +1,191 @@
+[
+  {
+    "id": "1",
+    "title": "Introduction to Variables",
+    "explanation": "In JavaScript, we use variables to store data values. You can declare a variable using the `let` or `const` keywords. `let` allows the variable to be reassigned, while `const` creates a constant that cannot be changed.",
+    "challenge": "Declare a variable named `myVariable` using `let` and assign it the string value `'Hello, World!'`.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof myVariable !== 'undefined' && myVariable === 'Hello, World!'",
+    "hint": "Remember to use the `let` keyword, followed by the variable name, the assignment operator (`=`), and then the value in quotes."
+  },
+  {
+    "id": "2",
+    "title": "Data Types: Strings",
+    "explanation": "A string is a sequence of characters used to represent text. You can create strings using single quotes (`' '`), double quotes (`\" \"`), or backticks (`` ``).",
+    "challenge": "Create a constant named `greeting` and assign it the value `\"Welcome to the challenges!\"`.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof greeting === 'string' && greeting === 'Welcome to the challenges!'",
+    "hint": "Use the `const` keyword for variables that should not be reassigned. Remember to enclose the string in double quotes."
+  },
+  {
+    "id": "3",
+    "title": "Data Types: Numbers",
+    "explanation": "JavaScript has one type of number, which can be an integer or a floating-point number. You can perform standard arithmetic operations like addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`).",
+    "challenge": "Create a constant named `userAge` and set it to your age. Then, create another constant named `ageInTenYears` that adds 10 to `userAge`.",
+    "initialCode": "const userAge = 25; // Change this to your age\n// Your code here",
+    "validation": "return typeof ageInTenYears !== 'undefined' && ageInTenYears === userAge + 10",
+    "hint": "To get the age in ten years, simply use the addition operator `+` on your `userAge` variable."
+  },
+  {
+    "id": "4",
+    "title": "Data Types: Booleans",
+    "explanation": "A boolean represents one of two values: `true` or `false`. They are often used for conditional logic.",
+    "challenge": "Create a constant named `isLearning` and set its value to `true`.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof isLearning === 'boolean' && isLearning === true",
+    "hint": "A boolean value is not a string. You can assign it directly: `const myBool = true;`."
+  },
+  {
+    "id": "5",
+    "title": "Functions",
+    "explanation": "A function is a block of code designed to perform a particular task. A function is executed when it is 'called' or 'invoked'.",
+    "challenge": "Define a function named `sayHello` that returns the string `'Hello!'`.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof sayHello === 'function' && sayHello() === 'Hello!'",
+    "hint": "Use the `function` keyword, followed by the function name, parentheses `()`, and curly braces `{}`. Use the `return` keyword inside the function."
+  },
+  {
+    "id": "6",
+    "title": "Function with Parameters",
+    "explanation": "Functions can accept parameters, which are values you pass into the function to be used inside it.",
+    "challenge": "Define a function named `add` that takes two parameters, `a` and `b`, and returns their sum.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof add === 'function' && add(5, 10) === 15 && add(-1, 1) === 0",
+    "hint": "Place the parameter names inside the parentheses, like `function myFunction(param1, param2)`. Then, use them inside the function."
+  },
+  {
+    "id": "7",
+    "title": "Conditional Logic with if/else",
+    "explanation": "The `if/else` statement executes a block of code if a specified condition is true, and another block if it is false.",
+    "challenge": "Write a function `checkAge` that takes an `age` parameter. If the age is 18 or greater, it should return `'Adult'`. Otherwise, it should return `'Minor'`.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof checkAge === 'function' && checkAge(20) === 'Adult' && checkAge(16) === 'Minor'",
+    "hint": "Your condition inside the `if` statement should check if `age` is greater than or equal to 18. Use the `>=` operator."
+  },
+  {
+    "id": "8",
+    "title": "Arrays",
+    "explanation": "An array is a special variable that can hold more than one value at a time. Array elements are accessed by their index number, starting from 0.",
+    "challenge": "Create an array named `colors` that contains three strings: `'red'`, `'green'`, and `'blue'`.",
+    "initialCode": "// Your code here",
+    "validation": "return Array.isArray(colors) && colors.length === 3 && colors[0] === 'red' && colors[2] === 'blue'",
+    "hint": "Declare an array using square brackets `[]`, and separate the elements with commas."
+  },
+  {
+    "id": "9",
+    "title": "Array Methods: push",
+    "explanation": "The `push()` method adds a new element to the end of an array and returns the new length.",
+    "challenge": "Create an array named `fruits` with `'apple'` and `'banana'`. Then, use the `push()` method to add `'cherry'` to the end of the array.",
+    "initialCode": "const fruits = ['apple', 'banana'];\n// Your code here",
+    "validation": "return Array.isArray(fruits) && fruits.length === 3 && fruits[2] === 'cherry'",
+    "hint": "You can call the `push` method directly on your array variable, like this: `myArray.push('new-item');`."
+  },
+  {
+    "id": "10",
+    "title": "Objects",
+    "explanation": "An object is a collection of key/value pairs. The values can be any data type, including other objects or functions.",
+    "challenge": "Create an object named `user` with two properties: `name` set to `'Alex'` and `email` set to `'alex@example.com'`.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof user === 'object' && user !== null && user.name === 'Alex' && user.email === 'alex@example.com'",
+    "hint": "Use curly braces `{}` to create an object. Inside, define properties like `key: value`, separated by commas."
+  },
+  {
+    "id": "11",
+    "title": "Looping with for",
+    "explanation": "A `for` loop repeats a block of code a specified number of times. It's great for iterating over arrays.",
+    "challenge": "Write a function `sumArray` that takes an array of numbers and returns the sum of all the numbers in it.",
+    "initialCode": "// Your code here",
+    "validation": "return typeof sumArray === 'function' && sumArray([1, 2, 3]) === 6 && sumArray([10, -5, 5]) === 10",
+    "hint": "Initialize a `sum` variable to 0. Loop through the array from the first element to the last, adding each element to the `sum`."
+  },
+  {
+    "id": "12",
+    "title": "FizzBuzz",
+    "explanation": "A classic coding challenge. Write a function that takes a number and returns 'Fizz' for multiples of three, 'Buzz' for multiples of five, and 'FizzBuzz' for multiples of both three and five. If the number is not a multiple of three or five, it should return the number itself.",
+    "challenge": "Write a function named `fizzBuzz` that takes a single number argument and returns the correct string or number.",
+    "initialCode": "function fizzBuzz(num) {\n  // Your code here\n}",
+    "validation": "return typeof fizzBuzz === 'function' && fizzBuzz(3) === 'Fizz' && fizzBuzz(5) === 'Buzz' && fizzBuzz(15) === 'FizzBuzz' && fizzBuzz(7) === 7 && fizzBuzz(9) === 'Fizz'",
+    "hint": "Use the modulo operator (`%`) to check for remainders. The order of your `if/else if` statements matters! Check for the 'FizzBuzz' case first."
+  },
+  {
+    "id": "13",
+    "title": "Reverse a String",
+    "explanation": "A common task is to reverse a string. For example, 'hello' becomes 'olleh'.",
+    "challenge": "Write a function named `reverseString` that takes a string and returns a new string with the order of characters reversed.",
+    "initialCode": "function reverseString(str) {\n  // Your code here\n}",
+    "validation": "return typeof reverseString === 'function' && reverseString('hello') === 'olleh' && reverseString('world') === 'dlrow' && reverseString('JavaScript') === 'tpircSavaJ' && reverseString('a') === 'a' && reverseString('') === ''",
+    "hint": "You can convert the string to an array of characters, use the array's `reverse()` method, and then join it back into a string."
+  },
+  {
+    "id": "14",
+    "title": "Palindrome Checker",
+    "explanation": "A palindrome is a word, phrase, or sequence that reads the same backward as forward. For this challenge, you should ignore punctuation, case, and spacing.",
+    "challenge": "Write a function `isPalindrome` that takes a string and returns `true` if the string is a palindrome and `false` otherwise.",
+    "initialCode": "function isPalindrome(str) {\n  // Your code here\n}",
+    "validation": "return typeof isPalindrome === 'function' && isPalindrome('racecar') === true && isPalindrome('hello') === false && isPalindrome('A man, a plan, a canal: Panama') === true && isPalindrome('12321') === true && isPalindrome('not a palindrome') === false",
+    "hint": "First, clean the string by removing non-alphanumeric characters and converting it to lowercase. Then, compare the cleaned string to its reversed version."
+  },
+  {
+    "id": "15",
+    "title": "Find the Longest Word",
+    "explanation": "This challenge involves iterating through a sentence to find the word with the most characters.",
+    "challenge": "Write a function `findLongestWord` that takes a sentence as a string and returns the longest word in the sentence. If two words have the same length, return the first one.",
+    "initialCode": "function findLongestWord(str) {\n  // Your code here\n}",
+    "validation": "return typeof findLongestWord === 'function' && findLongestWord('The quick brown fox jumped over the lazy dog') === 'jumped' && findLongestWord('May the force be with you') === 'force' && findLongestWord('Google do a barrel roll') === 'Google' && findLongestWord('What is the average airspeed velocity of an unladen swallow') === 'airspeed' && findLongestWord('a b c d e fgh') === 'fgh'",
+    "hint": "Split the sentence into an array of words. Loop through the array, keeping track of the longest word you've found so far."
+  },
+  {
+    "id": "16",
+    "title": "Factorialize a Number",
+    "explanation": "The factorial of a non-negative integer `n`, denoted by `n!`, is the product of all positive integers less than or equal to `n`. For example, 5! = 5 * 4 * 3 * 2 * 1 = 120. The factorial of 0 is 1.",
+    "challenge": "Write a function `factorial` that takes a number and returns its factorial.",
+    "initialCode": "function factorial(num) {\n  // Your code here\n}",
+    "validation": "return typeof factorial === 'function' && factorial(5) === 120 && factorial(10) === 3628800 && factorial(0) === 1 && factorial(1) === 1 && factorial(3) === 6",
+    "hint": "Use a loop that counts down from the number to 1, multiplying a result variable by the counter at each step. Remember the edge case for 0."
+  },
+  {
+    "id": "17",
+    "title": "Title Case a Sentence",
+    "explanation": "Title case means that the first letter of each word is capitalized, and the rest of the word is in lower case.",
+    "challenge": "Write a function `titleCase` that takes a string and converts it to title case.",
+    "initialCode": "function titleCase(str) {\n  // Your code here\n}",
+    "validation": "return typeof titleCase === 'function' && titleCase(\"I'm a little tea pot\") === \"I'm A Little Tea Pot\" && titleCase('sHoRt AnD sToUt') === 'Short And Stout' && titleCase('HERE IS MY HANDLE HERE IS MY SPOUT') === 'Here Is My Handle Here Is My Spout' && titleCase('javascript is awesome') === 'Javascript Is Awesome' && titleCase('a') === 'A'",
+    "hint": "Split the string into an array of words. Loop through the array and for each word, capitalize the first letter and lowercase the rest. Join the array back into a string."
+  },
+  {
+    "id": "18",
+    "title": "Find Max Character",
+    "explanation": "This involves finding the character that appears most frequently in a string.",
+    "challenge": "Write a function `maxChar` that takes a string and returns the character that appears most often. If there is a tie, return the character that appeared first.",
+    "initialCode": "function maxChar(str) {\n  // Your code here\n}",
+    "validation": "return typeof maxChar === 'function' && maxChar('abcccccccd') === 'c' && maxChar('apple 1231111') === '1' && maxChar('hello world') === 'l' && maxChar('a') === 'a' && maxChar('aabbc') === 'a'",
+    "hint": "Create an object to store the character counts. Loop through the string to build the map. Then loop through the map to find the character with the highest count."
+  },
+  {
+    "id": "19",
+    "title": "Anagram Checker",
+    "explanation": "An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once. For example, 'listen' is an anagram of 'silent'. Ignore case and non-alphanumeric characters.",
+    "challenge": "Write a function `isAnagram` that takes two strings and returns `true` if they are anagrams of each other, and `false` otherwise.",
+    "initialCode": "function isAnagram(str1, str2) {\n  // Your code here\n}",
+    "validation": "return typeof isAnagram === 'function' && isAnagram('rail safety', 'fairy tales') === true && isAnagram('RAIL! SAFETY!', 'fairy tales') === true && isAnagram('Hi there', 'Bye there') === false && isAnagram('dormitory', 'dirty room') === true && isAnagram('listen', 'silent') === true",
+    "hint": "Create helper function to clean the strings (lowercase, remove non-alphanumeric chars, sort). Then, compare the cleaned strings."
+  },
+  {
+    "id": "20",
+    "title": "Fibonacci Sequence",
+    "explanation": "The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1. So, the sequence goes: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...",
+    "challenge": "Write a function `fibonacci` that takes a number `n` and returns the `n`-th number in the Fibonacci sequence (starting from index 0).",
+    "initialCode": "function fibonacci(n) {\n  // Your code here\n}",
+    "validation": "return typeof fibonacci === 'function' && fibonacci(0) === 0 && fibonacci(1) === 1 && fibonacci(6) === 8 && fibonacci(10) === 55 && fibonacci(20) === 6765",
+    "hint": "An iterative solution is efficient. Create an array starting with [0, 1]. Then loop from 2 up to `n`, adding the previous two numbers and pushing the result to the array."
+  },
+  {
+    "id": "21",
+    "title": "Two Sum",
+    "explanation": "A very common interview question. Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`.",
+    "challenge": "Write a a function `twoSum` that takes an array of numbers and a target number, and returns an array containing the two indices. You may assume that each input would have exactly one solution, and you may not use the same element twice.",
+    "initialCode": "function twoSum(nums, target) {\n  // Your code here\n}",
+    "validation": "return typeof twoSum === 'function' && JSON.stringify(twoSum([2, 7, 11, 15], 9)) === JSON.stringify([0, 1]) && JSON.stringify(twoSum([3, 2, 4], 6)) === JSON.stringify([1, 2]) && JSON.stringify(twoSum([3, 3], 6)) === JSON.stringify([0, 1]) && JSON.stringify(twoSum([0, 4, 3, 0], 0)) === JSON.stringify([0, 3]) && JSON.stringify(twoSum([-1, -2, -3, -4, -5], -8)) === JSON.stringify([2, 4])",
+    "hint": "A hash map (or a plain JavaScript object) is great for this. Loop through the array. For each element, calculate the needed complement (`target - current_number`). If the complement exists in your map, you have a solution. If not, add the current number and its index to the map."
+  }
+]

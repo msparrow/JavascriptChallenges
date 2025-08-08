@@ -1,0 +1,199 @@
+
+:root {
+  --background-color: #1e1e1e;
+  --text-color: #d4d4d4;
+  --primary-color: #007acc;
+  --border-color: #333;
+  --success-color: #4caf50;
+  --failure-color: #f44336;
+  --editor-bg: #1e1e1e;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.lesson-pane {
+  flex: 1;
+  padding: 1.5rem;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+}
+
+.lesson-pane h1 {
+  color: var(--primary-color);
+}
+
+.editor-pane {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--editor-bg);
+}
+
+.editor-actions {
+  display: flex;
+}
+
+.run-button, .reset-button {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  border-top: 1px solid var(--border-color);
+}
+
+.run-button {
+  background-color: var(--primary-color);
+}
+
+.run-button:hover {
+  background-color: #005a9e;
+}
+
+.reset-button {
+  background-color: #4f4f4f;
+}
+
+.reset-button:hover {
+  background-color: #666;
+}
+
+.run-button:hover {
+  background-color: #005a9e;
+}
+
+.preview-pane {
+  flex: 1;
+  border-left: 1px solid var(--border-color);
+}
+
+.preview-pane iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #fff; /* Keep preview pane light for contrast */
+}
+
+.navigation-controls {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lesson-dropdown {
+  width: 100%;
+  padding: 0.6rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.lesson-dropdown:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.navigation-buttons button {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.navigation-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.navigation-buttons button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.challenge-actions {
+  margin-top: 1.5rem;
+}
+
+.hint-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hint-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.hint-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.result {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.result.success {
+  border: 1px solid var(--success-color);
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--success-color);
+}
+
+.result.failure {
+  border: 1px solid var(--failure-color);
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--failure-color);
+}
+
+.status-pane {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+}
+
+.error-pane {
+  color: var(--failure-color);
+}
+
+/* CodeMirror alternate line background */
+.cm-editor .cm-gutters {
+  background-color: var(--editor-bg);
+  border-right: 1px solid var(--border-color);
+}
+
+.cm-editor .cm-line:nth-child(2n) {
+    background-color: rgba(255, 255, 255, 0.03);
+}

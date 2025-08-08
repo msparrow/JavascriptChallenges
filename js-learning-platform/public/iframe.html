@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: sans-serif;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <script>
+    window.addEventListener('message', event => {
+      if (event.source !== window.parent) return;
+
+      const { script } = event.data;
+      if (script) {
+        try {
+          // Clear previous output
+          document.getElementById('output').innerHTML = '';
+          // Execute the script sent from the parent
+          new Function(script)();
+        } catch (e) {
+          // This catch is a fallback, but errors should be caught in the parent script
+          window.parent.postMessage({ type: 'result', payload: `Iframe Error: ${e.message}` }, '*');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
