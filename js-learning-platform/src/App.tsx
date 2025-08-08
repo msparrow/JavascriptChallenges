@@ -36,7 +36,8 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [showGlossary, setShowGlossary] = useState(false);
-  const [glossary, setGlossary] = useState<{ term: string; definition: string }[]>([]);
+  const [glossary, setGlossary] = useState<{ term: string; definition: string; example?: string }[]>([]);
+  const [expandedGlossary, setExpandedGlossary] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL || '/';
@@ -67,6 +68,10 @@ function App() {
       .then((items) => setGlossary(items))
       .catch(() => setGlossary([]));
   }, []);
+
+  const toggleGlossary = (idx: number) => {
+    setExpandedGlossary(prev => ({ ...prev, [idx]: !prev[idx] }));
+  };
 
   // Load initial code from localStorage or default
   useEffect(() => {
@@ -275,12 +280,27 @@ function App() {
             </div>
             <div className="modal-body glossary-list">
               {glossary.length === 0 && <p>No glossary items found.</p>}
-              {glossary.map((g, idx) => (
-                <div key={idx} className="glossary-item">
-                  <div className="term">{g.term}</div>
-                  <div className="definition">{g.definition}</div>
-                </div>
-              ))}
+              {glossary.map((g, idx) => {
+                const isOpen = !!expandedGlossary[idx];
+                return (
+                  <div key={idx} className={`glossary-item ${isOpen ? 'open' : ''}`}>
+                    <button className="glossary-header" onClick={() => toggleGlossary(idx)}>
+                      <span className="term">{g.term}</span>
+                      <span className={`chevron ${isOpen ? 'rot' : ''}`}>▾</span>
+                    </button>
+                    {isOpen && (
+                      <div className="glossary-content">
+                        <p className="definition">{g.definition}</p>
+                        {g.example && (
+                          <div className="code-block">
+                            <pre><code>{g.example}</code></pre>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
