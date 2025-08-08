@@ -480,7 +480,7 @@
       {"name": "tabs", "assertion": "return reverseWords('\t a  b')==='b a'"},
       {"name": "unicode", "assertion": "return reverseWords('こんにちは 世界')==='世界 こんにちは'"}
     ],
-    "hint": "Split on whitespace with /\s+/, filter empties, reverse, join with ' '."
+    "hint": "Split on whitespace with /\\s+/, filter empties, reverse, join with ' '."
   }
   ,
   {
