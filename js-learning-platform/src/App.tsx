@@ -60,6 +60,7 @@ function App() {
       });
   }, []);
 
+  //Test comment
   // Load glossary once
   useEffect(() => {
     const base = import.meta.env.BASE_URL || '/';
