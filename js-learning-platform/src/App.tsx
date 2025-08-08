@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
@@ -38,6 +38,23 @@ function App() {
   const [showGlossary, setShowGlossary] = useState(false);
   const [glossary, setGlossary] = useState<{ term: string; definition: string; example?: string }[]>([]);
   const [expandedGlossary, setExpandedGlossary] = useState<Record<number, boolean>>({});
+  // Theming
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const stored = localStorage.getItem('ui-theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  });
+  // Resizable layout state (percent widths)
+  const [lessonWidthPct, setLessonWidthPct] = useState<number>(() => {
+    const stored = localStorage.getItem('ui-lesson-width');
+    return stored ? Number(stored) : 26;
+  });
+  const [previewWidthPct, setPreviewWidthPct] = useState<number>(() => {
+    const stored = localStorage.getItem('ui-preview-width');
+    return stored ? Number(stored) : 26;
+  });
+  const layoutRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL || '/';
@@ -69,6 +86,31 @@ function App() {
       .then((items) => setGlossary(items))
       .catch(() => setGlossary([]));
   }, []);
+
+  // Apply theme to document root
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('ui-theme', theme);
+  }, [theme]);
+
+  // Apply resizable widths as CSS variables
+  useEffect(() => {
+    const root = layoutRef.current;
+    if (root) {
+      root.style.setProperty('--lesson-width', `${lessonWidthPct}%`);
+      root.style.setProperty('--preview-width', `${previewWidthPct}%`);
+    }
+    localStorage.setItem('ui-lesson-width', String(lessonWidthPct));
+  }, [lessonWidthPct]);
+
+  useEffect(() => {
+    const root = layoutRef.current;
+    if (root) {
+      root.style.setProperty('--lesson-width', `${lessonWidthPct}%`);
+      root.style.setProperty('--preview-width', `${previewWidthPct}%`);
+    }
+    localStorage.setItem('ui-preview-width', String(previewWidthPct));
+  }, [previewWidthPct]);
 
   const toggleGlossary = (idx: number) => {
     setExpandedGlossary(prev => ({ ...prev, [idx]: !prev[idx] }));
@@ -130,6 +172,81 @@ function App() {
         }
       `;
       iframe.contentWindow.postMessage({ script: fullScript }, '*');
+    }
+  };
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd+Enter to run code
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        handleRunCode();
+        return;
+      }
+      // Alt+ArrowLeft/Right to navigate lessons
+      if (e.altKey && e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPreviousLesson();
+        return;
+      }
+      if (e.altKey && e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToNextLesson();
+        return;
+      }
+      // g to toggle glossary
+      if (!e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 'g') {
+        setShowGlossary(prev => !prev);
+      }
+      // t to toggle theme
+      if (!e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 't') {
+        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [handleRunCode]);
+
+  // Splitter drag logic
+  const startDrag = (which: 'left' | 'right', startEvent: React.MouseEvent<HTMLDivElement>) => {
+    const container = layoutRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const containerWidth = rect.width;
+    const startX = startEvent.clientX;
+    const startingLesson = lessonWidthPct;
+    const startingPreview = previewWidthPct;
+
+    const onMove = (ev: MouseEvent) => {
+      const deltaPx = ev.clientX - startX;
+      const deltaPct = (deltaPx / containerWidth) * 100;
+      if (which === 'left') {
+        const next = Math.min(45, Math.max(15, startingLesson + deltaPct));
+        setLessonWidthPct(next);
+      } else {
+        const next = Math.min(45, Math.max(15, startingPreview - deltaPct));
+        setPreviewWidthPct(next);
+      }
+    };
+    const onUp = () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  const onSplitterKeyDown = (which: 'left' | 'right') => (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const step = e.shiftKey ? 5 : 2;
+    if (e.key === 'ArrowLeft') {
+      if (which === 'left') setLessonWidthPct(v => Math.max(15, v - step));
+      if (which === 'right') setPreviewWidthPct(v => Math.min(45, v + step));
+      e.preventDefault();
+    } else if (e.key === 'ArrowRight') {
+      if (which === 'left') setLessonWidthPct(v => Math.min(45, v + step));
+      if (which === 'right') setPreviewWidthPct(v => Math.max(15, v - step));
+      e.preventDefault();
     }
   };
 
@@ -204,9 +321,32 @@ function App() {
 
   const base = import.meta.env.BASE_URL || '/';
   return (
-    <div className="App">
-      <button className="glossary-fab" onClick={() => setShowGlossary(true)}>Glossary</button>
-      <div className="lesson-pane">
+    <div className="App" ref={layoutRef}>
+      <header className="toolbar" role="banner">
+        <div className="toolbar-left">
+          <strong className="app-title">JavaScript Learning Platform</strong>
+        </div>
+        <div className="toolbar-right">
+          <div className="kbd-hints" aria-hidden>
+            <span title="Run (Ctrl/⌘+Enter)">Run ⌃⏎</span>
+            <span title="Prev/Next (Alt+←/→)">Alt ←/→</span>
+            <span title="Toggle Theme (T)">T</span>
+          </div>
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+            aria-pressed={theme === 'dark'}
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          >
+            {theme === 'dark' ? '🌙' : '☀️'}
+          </button>
+        </div>
+      </header>
+
+      <div className="layout" role="main" aria-label="Learning workspace">
+        <div className="lesson-pane" aria-label="Lesson content">
         <h1>{lesson.title}</h1>
         <p>{lesson.explanation}</p>
         <p><strong>Challenge:</strong> {lesson.challenge}</p>
@@ -237,39 +377,66 @@ function App() {
             <p><strong>Hint:</strong> {lesson.hint}</p>
           </div>
         )}
-        {result && (
-          <div className={`result ${result.includes('Success') ? 'success' : 'failure'}`}>
+          <div
+            className="result"
+            data-status={result.includes('Success') ? 'success' : result ? 'failure' : ''}
+            aria-live="polite"
+          >
             {result}
           </div>
-        )}
-        {testResult && (
-          <div className={`result ${testResult.passCount === testResult.totalCount ? 'success' : 'failure'}`}>
-            <div><strong>{testResult.passCount} / {testResult.totalCount}</strong> tests passed</div>
-            <ul className="test-details">
-              {testResult.details.map((d, i) => (
-                <li key={i} className={d.passed ? 'passed' : 'failed'}>
-                  {d.passed ? '✔' : '✖'} {d.name}{d.error ? ` — ${d.error}` : ''}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-      <div className="editor-pane">
-        <CodeMirror
-          value={code}
-          height="calc(100vh - 40px)"
-          extensions={[javascript({ jsx: true })]}
-          theme={vscodeDark}
-          onChange={handleCodeChange}
-        />
-        <div className="editor-actions">
-          <button className="run-button" onClick={handleRunCode}>Run Code</button>
-          <button className="reset-button" onClick={handleResetCode}>Reset Code</button>
+          {testResult && (
+            <div className={`result ${testResult.passCount === testResult.totalCount ? 'success' : 'failure'}`}>
+              <div><strong>{testResult.passCount} / {testResult.totalCount}</strong> tests passed</div>
+              <ul className="test-details">
+                {testResult.details.map((d, i) => (
+                  <li key={i} className={d.passed ? 'passed' : 'failed'}>
+                    {d.passed ? '✔' : '✖'} {d.name}{d.error ? ` — ${d.error}` : ''}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-      </div>
-      <div className="preview-pane">
-        <iframe id="preview" src={`${base}iframe.html`} title="Preview"></iframe>
+
+        <div
+          className="splitter"
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="Resize lesson pane"
+          tabIndex={0}
+          onMouseDown={(e) => startDrag('left', e)}
+          onKeyDown={onSplitterKeyDown('left')}
+        />
+
+        <div className="editor-pane" aria-label="Code editor">
+          <div className="editor-scroll">
+            <CodeMirror
+              value={code}
+              height="100%"
+              extensions={[javascript({ jsx: true })]}
+              theme={vscodeDark}
+              onChange={handleCodeChange}
+            />
+          </div>
+          <div className="editor-actions">
+            <button className="run-button" onClick={handleRunCode} title="Run (Ctrl/⌘+Enter)">Run Code</button>
+            <button className="reset-button" onClick={handleResetCode}>Reset Code</button>
+          </div>
+        </div>
+
+        <div
+          className="splitter"
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="Resize preview pane"
+          tabIndex={0}
+          onMouseDown={(e) => startDrag('right', e)}
+          onKeyDown={onSplitterKeyDown('right')}
+        />
+
+        <div className="preview-pane" aria-label="Code output">
+          <iframe id="preview" src={`${base}iframe.html`} title="Preview output" />
+        </div>
       </div>
 
       {showGlossary && (
@@ -306,6 +473,7 @@ function App() {
           </div>
         </div>
       )}
+      <button className="glossary-fab" onClick={() => setShowGlossary(true)} title="Open glossary (G)">Glossary</button>
     </div>
   );
 }
